@@ -23,14 +23,14 @@ public class DdService {
 	
 	public void inicializaBancoDeDados() throws ParseException {
 		
-		ArrayList<Produtos> p = new ArrayList<Produtos>();
-		Insumo i1 = new Insumo("limao", );
+		ArrayList<Insumo> p = new ArrayList<Insumo>();
+		Insumo i1 = new Insumo("limao", 2);
 		Insumo i2 = new Insumo("peixe", 5);
-		i.add(i1);
-		i.add(i2);
+		p.add(i1);
+		p.add(i2);
 		repIns.saveAll(Arrays.asList(i1, i2));
 		
-		Produtos p1 = new Produtos("Peixe Frito", i);
+		Produtos p1 = new Produtos("Peixe Frito", p);
 		repPro.saveAll(Arrays.asList(p1));
 		
 		

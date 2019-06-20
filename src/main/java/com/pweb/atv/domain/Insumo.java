@@ -1,7 +1,6 @@
 package com.pweb.atv.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,12 +29,9 @@ public class Insumo implements Serializable{
 	@JoinColumn(name="produto_id")
 	private Produtos produto;
 	
-	public Insumo(String nome, int qnt, ArrayList<Produtos> p){
+	public Insumo(String nome, int qnt){
 		this.nome_insumo = nome;
 		this.quantidade_estoque = qnt;
-		for (Produtos pt : p) {
-			this.produto = pt;
-		}
 	}
 
 	public Integer getId() {

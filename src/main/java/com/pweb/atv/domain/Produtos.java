@@ -8,7 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -25,11 +29,21 @@ public class Produtos implements Serializable{
 	private Integer quantidade;
 	
 
-	@OneToMany(mappedBy="produto")
+	@JsonIgnore
+	@ManyToMany
+	@JoinTable(name = "RELACAO",
+		joinColumns = @JoinColumn(name = "produtos_id"),
+		inverseJoinColumns = @JoinColumn(name = "insumo_id")
+	)
 	private List<Insumo> insumo = new ArrayList<>();
 	
-	public Produtos(String nome) {
+	public Produtos() {
+		
+	}
+	
+	public Produtos(String nome, ArrayList<Insumo> i) {
 		this.nome_produto = nome;
+		this.insumo = i;
 	}
 	
 	public Integer getId() {
