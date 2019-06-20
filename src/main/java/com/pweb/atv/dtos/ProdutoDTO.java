@@ -1,37 +1,27 @@
-package com.pweb.atv.domain;
+package com.pweb.atv.dtos;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import com.pweb.atv.domain.Produtos;
 
-
-@Entity
-public class Produtos implements Serializable{
-
+public class ProdutoDTO  implements Serializable{
+	
 	private static final long serialVersionUID = 1L;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	private String nome_produto;
-	
+	private String nome;
 	private Integer quantidade;
 	
-
-	@OneToMany(mappedBy="produto")
-	private List<Insumo> insumo = new ArrayList<>();
-	
-	public Produtos(String nome) {
-		this.nome_produto = nome;
+	public ProdutoDTO() {
+		// TODO Auto-generated constructor stub
 	}
 	
+	public ProdutoDTO(Produtos p) {
+		this.id = p.getId();
+		this.nome = p.getNome_produto();
+		this.quantidade = p.getQuantidade();
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -40,20 +30,12 @@ public class Produtos implements Serializable{
 		this.id = id;
 	}
 
-	public String getNome_produto() {
-		return nome_produto;
+	public String getNome() {
+		return nome;
 	}
 
-	public List<Insumo> getInsumo() {
-		return insumo;
-	}
-
-	public void setInsumo(List<Insumo> insumo) {
-		this.insumo = insumo;
-	}
-
-	public void setNome_produto(String nome_produto) {
-		this.nome_produto = nome_produto;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public Integer getQuantidade() {
@@ -64,13 +46,12 @@ public class Produtos implements Serializable{
 		this.quantidade = quantidade;
 	}
 
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((nome_produto == null) ? 0 : nome_produto.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((quantidade == null) ? 0 : quantidade.hashCode());
 		return result;
 	}
@@ -83,16 +64,16 @@ public class Produtos implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Produtos other = (Produtos) obj;
+		ProdutoDTO other = (ProdutoDTO) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (nome_produto == null) {
-			if (other.nome_produto != null)
+		if (nome == null) {
+			if (other.nome != null)
 				return false;
-		} else if (!nome_produto.equals(other.nome_produto))
+		} else if (!nome.equals(other.nome))
 			return false;
 		if (quantidade == null) {
 			if (other.quantidade != null)

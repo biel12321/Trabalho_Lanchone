@@ -2,37 +2,40 @@ package com.pweb.atv.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Insumo implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	@Id // coloca o id como chave primaria.
-	@GeneratedValue(strategy=GenerationType.IDENTITY) // coloca id como autoIncremento
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
 	private String nome_insumo;
 	
 	private Integer quantidade_estoque;
+
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="produto_id")
+	private Produtos produto;
 	
-	@ManyToMany(mappedBy="insumos")
-	private List<Ingredientes> ingrediente = new ArrayList<>();
-
-	public List<Ingredientes> getIngrediente() {
-		return ingrediente;
-	}
-
-	public void setIngrediente(List<Ingredientes> ingrediente) {
-		this.ingrediente = ingrediente;
+	public Insumo(String nome, int qnt, ArrayList<Produtos> p){
+		this.nome_insumo = nome;
+		this.quantidade_estoque = qnt;
+		for (Produtos pt : p) {
+			this.produto = pt;
+		}
 	}
 
 	public Integer getId() {
