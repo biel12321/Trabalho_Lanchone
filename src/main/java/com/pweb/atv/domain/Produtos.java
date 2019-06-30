@@ -28,7 +28,6 @@ public class Produtos implements Serializable{
 	
 	private Integer quantidade;
 	
-
 	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "RELACAO",
@@ -36,14 +35,24 @@ public class Produtos implements Serializable{
 		inverseJoinColumns = @JoinColumn(name = "insumo_id")
 	)
 	private List<Insumo> insumo = new ArrayList<>();
-	
+
 	public Produtos() {
 		
 	}
 	
-	public Produtos(String nome, ArrayList<Insumo> i) {
+	public Produtos(String nome, List<Insumo> i) {
+		super();
 		this.nome_produto = nome;
 		this.insumo = i;
+	}
+	
+
+	public List<Insumo> getInsumo() {
+		return insumo;
+	}
+
+	public void setInsumo(List<Insumo> insumo) {
+		this.insumo = insumo;
 	}
 	
 	public Integer getId() {
@@ -56,14 +65,6 @@ public class Produtos implements Serializable{
 
 	public String getNome_produto() {
 		return nome_produto;
-	}
-
-	public List<Insumo> getInsumo() {
-		return insumo;
-	}
-
-	public void setInsumo(List<Insumo> insumo) {
-		this.insumo = insumo;
 	}
 
 	public void setNome_produto(String nome_produto) {

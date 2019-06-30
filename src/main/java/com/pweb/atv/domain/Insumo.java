@@ -23,15 +23,29 @@ public class Insumo implements Serializable{
 	private String nome_insumo;
 	
 	private Integer quantidade_estoque;
-
+	
 	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name="produto_id")
-	private Produtos produto;
+	@JoinColumn(name="insumo_id")
+	private Insumo insumo;
+	
+	public Insumo() {
+		
+	}
 	
 	public Insumo(String nome, int qnt){
+		super();
 		this.nome_insumo = nome;
-		this.quantidade_estoque = qnt;
+		this.quantidade_estoque = qnt;//getQuantidadeTotal(qnt);
+	}
+
+
+	public Insumo getInsumo() {
+		return insumo;
+	}
+
+	public void setInsumo(Insumo insumo) {
+		this.insumo = insumo;
 	}
 
 	public Integer getId() {

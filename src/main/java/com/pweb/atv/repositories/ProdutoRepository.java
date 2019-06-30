@@ -7,5 +7,5 @@ import com.pweb.atv.domain.Produtos;
 
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produtos, Integer>{
-
+	
 }

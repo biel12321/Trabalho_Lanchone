@@ -1,6 +1,7 @@
 package com.pweb.atv.dtos;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.pweb.atv.domain.Insumo;
 
@@ -21,7 +22,7 @@ public class InsumoDTO  implements Serializable{
 		this.nome = i.getNome_insumo();
 		this.estoque = i.getQuantidade_estoque();
 	}
-
+	
 	public Integer getId() {
 		return id;
 	}

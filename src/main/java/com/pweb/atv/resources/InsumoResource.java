@@ -10,12 +10,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.pweb.atv.domain.Insumo;
 import com.pweb.atv.dtos.InsumoDTO;
+import com.pweb.atv.resources.utils.URL;
 import com.pweb.atv.services.InsumoService;
+
 
 @RestController
 @RequestMapping(value="/insumo")
@@ -56,18 +59,20 @@ public class InsumoResource {
 			return ResponseEntity.noContent().build();
 		}
 		
-		//LISTAR TODAS
-		@RequestMapping(method=RequestMethod.GET)
-		public ResponseEntity<List<InsumoDTO>> findAll() {
-			List<Insumo> lista = service.findAll();
-			//ou for para percorrer a lista
-			//List<CategoriaDTO> listaDTO = lista.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
-			List<InsumoDTO> listaDTO = new ArrayList<InsumoDTO>();
-			for (Insumo c : lista) {
-				listaDTO.add(new InsumoDTO(c));
+		//LISTAR TODOS
+		@RequestMapping(method = RequestMethod.GET)
+		public ResponseEntity<List<InsumoDTO>> find(
+				@RequestParam(value = "nome", defaultValue = "") String nome,
+				@RequestParam(value = "insumo", defaultValue = "") Insumo insumo) {
+
+			//String nomeDecoded = URL.decodeParam(nome);
+			//List<Integer> ids = URL.decodeIntList(insumo);
+			List<Insumo> list = service.findAll();//(nomeDecoded, ids);
+			List<InsumoDTO> listDto = new ArrayList<InsumoDTO>();
+			for (Insumo i : list) {
+				listDto.add(new InsumoDTO(i));
 			}
-			return ResponseEntity.ok().body(listaDTO);
+			return ResponseEntity.ok().body(listDto);
+
 		}
-
-
 }

@@ -7,17 +7,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pweb.atv.domain.Insumo;
+import com.pweb.atv.domain.Relacao;
 import com.pweb.atv.repositories.InsumoRepository;
+import com.pweb.atv.repositories.RelacaoRepository;
 
 @Service
 public class InsumoService {
 
-	@Autowired //Injetor de variavel para quando for usado.
+	@Autowired
 	private InsumoRepository rep;
 	
-//	//BUSCA POR NOME
+	@Autowired
+	private RelacaoRepository relacaoRepository;
+	
+//	public List<Insumo> search(String nome, List<Integer> ids) {
+//		List<Relacao> insumo = relacaoRepository.findAllById(ids);
+//		return rep.findDistinctByNomeContainingAndRelacaoIn(nome, insumo);
+//	}
+//	
+//	//BUSCAR POR NOME
 //	public List<Insumo> buscaPorNome(String nome){
-//		return rep.findDistinctByNomeContainingOrderByNome(nome);
+//		return rep.findDistinctByNomeContainingAndRelacaoIn(nome, null);
 //	}
 	
 	//BUSCAR POR ID
@@ -31,13 +41,13 @@ public class InsumoService {
 		obj.setId(null);
 		return rep.save(obj);
 	}
-
+	
 	//ATUALIZAR
 	public Insumo update (Insumo obj) {
 		find(obj.getId());
 		return rep.save(obj);
 	}
-
+	
 	//DELETAR
 	public void delete (Integer id) {
 		find(id);
@@ -48,4 +58,5 @@ public class InsumoService {
 	public List<Insumo> findAll(){
 		return rep.findAll();
 	}
+		
 }
